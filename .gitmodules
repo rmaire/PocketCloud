@@ -1,0 +1,6 @@
+[submodule "devstack"]
+	path = devstack
+	url = https://github.com/rmaire/devstack.git
+[submodule "jlxd"]
+	path = jlxd
+	url = https://github.com/rmaire/jlxd.git
