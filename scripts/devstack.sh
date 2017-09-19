@@ -1,6 +1,11 @@
 sudo useradd -s /bin/bash -d /opt/stack -m stack
 echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
-sudo su - stack -c "git clone -b stable/pike https://git.openstack.org/openstack-dev/devstack"
+
+cp -r /vagrant/devstack /opt/stack
+
+chown -R stack:stack /opt/stack/devstack
+
+#sudo su - stack -c "git clone -b stable/pike https://git.openstack.org/openstack-dev/devstack"
 
 sudo su - stack -c "cd devstack; git checkout -t origin/stable/pike"
 

@@ -30,6 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 		lxd.vm.provision :shell, path: "scripts/base.sh"
 		lxd.vm.provision :shell, path: "scripts/lxd.sh", args: [settings["lxd"]["password"]]
+    lxd.vm.provision :shell, path: "scripts/jlxd.sh", run: "always"
 	end
 
 	config.vm.define "devstack" do |devstack|
