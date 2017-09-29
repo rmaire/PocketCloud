@@ -1,2 +1,4 @@
-cd /opt/jlxd/jlxd-ui
-nohup mvn spring-boot:run &
+apt-get install default-jdk maven -y
+
+#cd /opt/jlxd/jlxd-ui
+#nohup mvn spring-boot:run &
