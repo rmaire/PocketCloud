@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.define "lxd" do |lxd|
 		lxd.vm.box = "bento/ubuntu-17.04"
 		lxd.vm.network "private_network", ip: settings["lxd"]["ip"]
-		lxd.vm.hostname = "lxd.localnet.org"
+		lxd.vm.hostname = settings["lxd"]["hostname"]
 
 		if Vagrant.has_plugin?("vagrant-disksize")
 			lxd.disksize.size = settings["lxd"]["disksize"]
