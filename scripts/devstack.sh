@@ -13,5 +13,6 @@ sudo su - stack -c "echo COMPRESS_OFFLINE=false >> devstack/local.conf"
 sudo su - stack -c "echo COMPRESS_ENABLED=false >> devstack/local.conf"
 sudo su - stack -c "echo disable_service tempest >> devstack/local.conf"
 sudo su - stack -c "echo FLOATING_RANGE=$2 >> devstack/local.conf"
+sudo su - stack -c 'echo IMAGE_URLS="http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img" >> devstack/local.conf'
 
 sudo su - stack -c "cd devstack; ./stack.sh"
