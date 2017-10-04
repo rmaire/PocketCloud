@@ -12,7 +12,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 	config.vm.define "lxd" do |lxd|
 		lxd.vm.box = "bento/ubuntu-17.04"
-		lxd.vm.network "private_network", ip: settings["lxd"]["ip"]
+
+    lxd.vm.network "private_network", ip: settings["lxd"]["ip"]
+
+    if settings["lxd"]["bridge"] && settings["lxd"]["bridge"]["public"]
+      lxd.vm.network "public_network", auto_config: false
+    end
+
 		lxd.vm.hostname = settings["lxd"]["hostname"]
 
 		if Vagrant.has_plugin?("vagrant-disksize")
@@ -30,6 +36,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 		lxd.vm.provision :shell, path: "scripts/base.sh"
 		lxd.vm.provision :shell, path: "scripts/lxd.sh", args: [settings["lxd"]["password"]]
+
+    if settings["lxd"]["bridge"] && settings["lxd"]["bridge"]["public"]
+      lxd.vm.provision :shell, path: "scripts/lxd-bridge.sh"
+      if Vagrant.has_plugin?("vagrant-reload")
+  			lxd.vm.provision :reload
+  		end
+      lxd.vm.provision :shell, path: "scripts/lxd-bridge-config.sh"
+    end
+
     lxd.vm.provision :shell, path: "scripts/jlxd.sh", run: "always"
 	end
 
@@ -76,9 +91,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		terraform.vm.provider "virtualbox" do |vb|
 			vb.memory = settings["terraform"]["ram"]
 			vb.cpus = settings["terraform"]["cpu"]
+      vb.gui = settings["terraform"]["desktop"]
 		end
 
 		terraform.vm.provision :shell, path: "scripts/base.sh"
 		terraform.vm.provision :shell, path: "scripts/terra.sh"
+    if settings["terraform"]["desktop"]
+      terraform.vm.provision :shell, path: "scripts/desktop.sh"
+    end
 	end
 end
