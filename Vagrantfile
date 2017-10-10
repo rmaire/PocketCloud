@@ -29,6 +29,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 			vb.memory = settings["lxd"]["ram"]
 			vb.cpus = settings["lxd"]["cpu"]
 			vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+			if settings["lxd"]["bridge"]
+				vb.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
+			end
 			if settings["lxd"]["mac"]
 				vb.customize ["modifyvm", :id, "--macaddress2", settings["lxd"]["mac"]]
 			end
