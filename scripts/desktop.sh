@@ -1,0 +1,1 @@
+apt-get --no-install-recommends -y install ubuntu-desktop
