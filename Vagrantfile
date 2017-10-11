@@ -81,26 +81,29 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 	end
 
-	config.vm.define "terraform" do |terraform|
-		terraform.vm.box = "bento/ubuntu-17.04"
+	config.vm.define "controller" do |controller|
+		controller.vm.box = "bento/ubuntu-17.04"
 
 		if Vagrant.has_plugin?("vagrant-disksize")
-			terraform.disksize.size = settings["terraform"]["disksize"]
+			controller.disksize.size = settings["controller"]["disksize"]
 		end
 
-		terraform.vm.network "private_network", ip: settings["terraform"]["ip"]
-		terraform.vm.hostname = settings["terraform"]["hostname"]
+		controller.vm.network "private_network", ip: settings["controller"]["ip"]
+		controller.vm.hostname = settings["controller"]["hostname"]
 
-		terraform.vm.provider "virtualbox" do |vb|
-			vb.memory = settings["terraform"]["ram"]
-			vb.cpus = settings["terraform"]["cpu"]
-      vb.gui = settings["terraform"]["desktop"]
+		controller.vm.provider "virtualbox" do |vb|
+			vb.memory = settings["controller"]["ram"]
+			vb.cpus = settings["controller"]["cpu"]
+      vb.gui = settings["controller"]["desktop"]
 		end
 
-		terraform.vm.provision :shell, path: "scripts/base.sh"
-		terraform.vm.provision :shell, path: "scripts/terra.sh"
-    if settings["terraform"]["desktop"]
-      terraform.vm.provision :shell, path: "scripts/desktop.sh"
+		controller.vm.provision :shell, path: "scripts/base.sh"
+		controller.vm.provision :shell, path: "scripts/terra.sh"
+    if settings["controller"]["desktop"]
+      controller.vm.provision :shell, path: "scripts/desktop.sh"
+      if Vagrant.has_plugin?("vagrant-reload")
+  			controller.vm.provision :reload
+  		end
     end
 	end
 end
