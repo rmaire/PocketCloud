@@ -1,1 +1,1 @@
-apt-get --no-install-recommends -y install ubuntu-desktop
+apt-get -y install xubuntu-desktop firefox
