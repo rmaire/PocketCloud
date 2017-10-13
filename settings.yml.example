@@ -3,7 +3,7 @@ lxd:
   ip: "192.168.40.41"
   mac: "b28a2c64d9f8"
   disksize: "50GB"
-  ram: "2048"
+  ram: "1024"
   cpu: "1"
   password: "secret"
   bridge:
@@ -20,8 +20,32 @@ devstack:
     interface: "enp0s8"
     floating_range: "192.168.40.224/27"
 
+openstack:
+  hostname: "kolla"
+  disksize: "50GB"
+  ram: "8192"
+  cpu: "2"
+  password: "secret"
+  net:
+    management:
+      ip: "192.168.1.80"
+      interface: "enp0s8"
+      #mac: "8CCF89082AE3"
+    data:
+      ip: "192.168.1.90"
+      interface: "enp0s9"
+      #mac: "F7EF484ED9F9"
+    neutron:
+      vip_ip: "192.168.1.99"
+      dns: 192.168.1.1
+      gateway: 192.168.1.1
+      subnet: 192.168.1.0/24
+      allocation:
+        start: 192.168.1.122
+        end: 192.168.1.128
+
 controller:
-    hostname: "controller"
+    hostname: "terraform"
     ip: "192.168.40.45"
     disksize: "10GB"
     ram: "1024"
