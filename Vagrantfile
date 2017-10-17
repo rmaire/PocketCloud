@@ -54,7 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "kolla" do |kolla|
 		kolla.vm.box = "bento/ubuntu-16.04"
 
-    kolla.vm.hostname = settings["openstack"]["hostname"]
+		kolla.vm.hostname = settings["openstack"]["hostname"]
 
 		if Vagrant.has_plugin?("vagrant-vbguest")
 			kolla.vbguest.auto_update = false
@@ -72,11 +72,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 			vb.cpus = settings["openstack"]["cpu"]
 			vb.gui = false
 			vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
-      if settings["openstack"]["net"]["management"]["mac"]
+			if settings["openstack"]["net"]["management"]["mac"]
 				vb.customize ["modifyvm", :id, "--macaddress2", settings["openstack"]["net"]["management"]["mac"]]
 			end
 			vb.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
-      if settings["openstack"]["net"]["data"]["mac"]
+			if settings["openstack"]["net"]["data"]["mac"]
 				vb.customize ["modifyvm", :id, "--macaddress3", settings["openstack"]["net"]["data"]["mac"]]
 			end
 		end
@@ -86,15 +86,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		kolla.vm.provision :shell, path: "scripts/kolla/kolla.sh", args: [
 																			settings["openstack"]["net"]["management"]["interface"],
 																			settings["openstack"]["net"]["data"]["interface"],
-                                      settings["openstack"]["net"]["neutron"]["vip_ip"],
+																			settings["openstack"]["net"]["neutron"]["vip_ip"],
 																			settings["openstack"]["password"]
 																		]
 		kolla.vm.provision :shell, path: "scripts/kolla/openstack-config.sh", args: [
 																			settings["openstack"]["net"]["neutron"]["dns"],
 																			settings["openstack"]["net"]["neutron"]["allocation"]["start"],
-                                      settings["openstack"]["net"]["neutron"]["allocation"]["end"],
-                                      settings["openstack"]["net"]["neutron"]["gateway"],
-                                      settings["openstack"]["net"]["neutron"]["subnet"]
+																			settings["openstack"]["net"]["neutron"]["allocation"]["end"],
+																			settings["openstack"]["net"]["neutron"]["gateway"],
+																			settings["openstack"]["net"]["neutron"]["subnet"]
 																		]
 
 		if Vagrant.has_plugin?("vagrant-reload")
