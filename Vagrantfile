@@ -102,36 +102,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		end
 	end
 
-	config.vm.define "devstack" do |devstack|
-		devstack.vm.box = "bento/ubuntu-17.04"
-
-		devstack.vm.network "private_network", ip: settings["devstack"]["ip"]
-
-		devstack.vm.hostname = settings["devstack"]["hostname"]
-
-		if Vagrant.has_plugin?("vagrant-disksize")
-			devstack.disksize.size = settings["devstack"]["disksize"]
-		end
-
-		devstack.vm.provider "virtualbox" do |vb|
-			vb.memory = settings["devstack"]["ram"]
-			vb.cpus = settings["devstack"]["cpu"]
-			vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
-      if settings["devstack"]["mac"]
-        vb.customize ["modifyvm", :id, "--macaddress2", settings["devstack"]["mac"]]
-      end
-		end
-
-		devstack.vm.provision :shell, path: "scripts/base.sh"
-		devstack.vm.provision :shell, path: "scripts/devstack/routing.sh", args: [settings["devstack"]["interface"]]
-		devstack.vm.provision :shell, path: "scripts/devstack/devstack.sh", args: [
-																			settings["devstack"]["ip"],
-																			settings["devstack"]["floating_range"],
-																			settings["devstack"]["password"]
-																		]
-
-	end
-
 	config.vm.define "controller" do |controller|
 		controller.vm.box = "bento/ubuntu-17.04"
 

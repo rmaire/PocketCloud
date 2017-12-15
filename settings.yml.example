@@ -9,17 +9,6 @@ lxd:
   bridge:
     public: true
 
-devstack:
-    hostname: "devstack"
-    ip: "192.168.40.55"
-    mac: "F069EFDB5FF8"
-    disksize: "50GB"
-    ram: "8192"
-    cpu: "2"
-    password: "secret"
-    interface: "enp0s8"
-    floating_range: "192.168.40.224/27"
-
 openstack:
   hostname: "kolla"
   disksize: "50GB"
