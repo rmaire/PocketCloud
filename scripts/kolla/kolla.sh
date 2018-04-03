@@ -9,7 +9,7 @@ sed -i "s/^#neutron_external_interface.*/neutron_external_interface: $2/" /etc/k
 sed -i "s/^kolla_internal_vip_address.*/kolla_internal_vip_address: $3/" /etc/kolla/globals.yml
 sed -i "s/^#kolla_base_distro.*/kolla_base_distro: \"ubuntu\"/" /etc/kolla/globals.yml
 sed -i "s/^#kolla_install_type.*/kolla_install_type: \"source\"/" /etc/kolla/globals.yml
-sed -i "s/^#openstack_release.*/openstack_release: \"4.0.0\"/" /etc/kolla/globals.yml
+sed -i "s/^#openstack_release.*/openstack_release: \"pike\"/" /etc/kolla/globals.yml
 sed -i "s/^keystone_admin_password.*/keystone_admin_password: $4/" /etc/kolla/passwords.yml
 
 kolla-ansible -i all-in-one bootstrap-servers
