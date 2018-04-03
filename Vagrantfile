@@ -52,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "kolla" do |kolla|
-    kolla.vm.box = "bento/ubuntu-17.10"
+    kolla.vm.box = "ubuntu/xenial64"
 
     kolla.vm.hostname = settings["openstack"]["hostname"]
 
@@ -103,7 +103,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "controller" do |controller|
-    controller.vm.box = "bento/ubuntu-17.04"
+    controller.vm.box = "bento/ubuntu-17.10"
 
     if Vagrant.has_plugin?("vagrant-disksize")
       controller.disksize.size = settings["controller"]["disksize"]
