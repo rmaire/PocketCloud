@@ -52,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "kolla" do |kolla|
-    kolla.vm.box = "ubuntu/xenial64"
+    kolla.vm.box = "bento/ubuntu-16.04"
 
     kolla.vm.hostname = settings["openstack"]["hostname"]
 
