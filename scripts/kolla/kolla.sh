@@ -35,4 +35,4 @@ kolla-ansible deploy -i /home/vagrant/all-in-one
 kolla-ansible post-deploy
 pip install python-openstackclient python-glanceclient python-neutronclient
 source /etc/kolla/admin-openrc.sh
-/usr/local/share/kolla-ansible/init-runonce
+#/usr/local/share/kolla-ansible/init-runonce
