@@ -1,3 +1,7 @@
+# vagrant plugin install vagrant-vbguest
+# vagrant plugin install vagrant-disksize
+# vagrant plugin install vagrant-hostmanager
+
 require "yaml"
 
 if File.file?('settings.yml')
@@ -11,7 +15,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "lxd" do |lxd|
-    lxd.vm.box = "bento/ubuntu-17.04"
+    lxd.vm.box = "bento/ubuntu-16.04"
 
     lxd.vm.network "private_network", ip: settings["lxd"]["ip"]
 
@@ -103,7 +107,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "controller" do |controller|
-    controller.vm.box = "bento/ubuntu-17.10"
+    controller.vm.box = "bento/ubuntu-16.04"
 
     if Vagrant.has_plugin?("vagrant-disksize")
       controller.disksize.size = settings["controller"]["disksize"]

@@ -1,8 +1,8 @@
 source /etc/kolla/admin-openrc.sh
 
-wget http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
-openstack image create "Cirros 0.3.5" --file cirros-0.3.5-x86_64-disk.img --disk-format qcow2 --container-format bare --public
-
+# wget http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
+# openstack image create "Cirros 0.3.5" --file cirros-0.3.5-x86_64-disk.img --disk-format qcow2 --container-format bare --public
+#
 wget http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img
 openstack image create "Ubuntu Xenial" --file xenial-server-cloudimg-amd64-disk1.img --disk-format qcow2 --container-format bare --public
 

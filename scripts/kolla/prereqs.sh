@@ -5,6 +5,13 @@ pip install -U pip
 pip install -U setuptools
 pip install -U ansible
 
+cat << EOF > /etc/ansible/ansible.cfg
+[defaults]
+host_key_checking=False
+pipelining=True
+forks=100
+EOF
+
 #mkdir -p /etc/systemd/system/docker.service.d
 #tee /etc/systemd/system/docker.service.d/kolla.conf <<-'EOF'
 #[Service]
