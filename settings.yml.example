@@ -3,7 +3,7 @@ lxd:
   ip: "192.168.40.41"
   mac: "b28a2c64d9f8"
   disksize: "50GB"
-  ram: "1024"
+  ram: "2048"
   cpu: "1"
   password: "secret"
   bridge:
@@ -18,11 +18,11 @@ openstack:
   net:
     management:
       ip: "192.168.1.80"
-      interface: "enp0s8"
+      interface: "eth1"
       mac: "8ccf89082ae3"
     data:
       ip: "192.168.1.90"
-      interface: "enp0s9"
+      interface: "eth2"
       mac: "3ee010b4f38b"
     neutron:
       vip_ip: "192.168.1.99"
